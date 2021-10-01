@@ -18,7 +18,7 @@ namespace BankUI
             }
 
 
-
+            Save();
 
 
 
@@ -30,7 +30,7 @@ namespace BankUI
             while (true)
             {
                 var currentCustomer = list[0];
-
+                Console.WriteLine(currentCustomer.ToString());
                 foreach (var account in currentCustomer.CustomerAccounts)
                 {
                     Console.WriteLine(account.ToString());
@@ -60,6 +60,18 @@ namespace BankUI
                     }
                 }
             }
+        }
+
+        public static void Save()
+        {
+            var list = new List<string>()
+            {
+                "Word",
+                "Pig",
+                "Dunno"
+            };
+            var runner = new DataAccess.ReadFromCSV<string>();
+            runner.Write(list, "customer.txt");
         }
     }
 }

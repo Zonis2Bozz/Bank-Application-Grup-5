@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace BankLogic
 {
-    public class Bank
+    public class Bank //: IRead
     {
         private static List<Customer> AllCustomers { get; set; }
         public Bank()
@@ -78,5 +78,17 @@ namespace BankLogic
             }
             return validated;
         }
+
+        //public void ReadFromDB()
+        //{
+        //    var runner = new DataAccess.ReadFromCSV<Customer>();
+        //    runner.Write(AllCustomers, "customer.csv");
+        //}
+
+        //public void SaveToDB()
+        //{
+        //    var runner = new DataAccess.ReadFromCSV<Customer>();
+        //    runner.Write(AllCustomers, "customer.csv");
+        //}
     }
 }

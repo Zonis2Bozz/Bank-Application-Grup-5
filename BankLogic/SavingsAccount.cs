@@ -8,8 +8,8 @@ namespace BankLogic
 {
     public enum AccountType
     {
-        Savings = 5,
-        Spending = 2
+        Savings,
+        Spending
     }
     public class SavingsAccount
     {

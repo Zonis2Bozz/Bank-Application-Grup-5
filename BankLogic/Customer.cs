@@ -11,8 +11,9 @@ namespace BankLogic
         public string FullName { get; private set; }
 
 
-
         public readonly long CustomerSocialNumber;
+        private readonly string CustomerSince = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+
         public List<SavingsAccount> CustomerAccounts { get; private set; }
         public int NumberOfAccounts { get; private set; } = 0;
 
@@ -25,10 +26,19 @@ namespace BankLogic
             LastName = lastName;
             FullName = firstName + " " + lastName;
             CustomerSocialNumber = socialNumber;
+            CustomerAccounts = new List<SavingsAccount>();        
+        }
+        private Customer(string firstName, string lastName, long socialNumber, string customerSince)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            FullName = firstName + " " + lastName;
+            CustomerSocialNumber = socialNumber;
+            CustomerSince = customerSince;
             CustomerAccounts = new List<SavingsAccount>();
         }
 
-        public void ChangeCustomerFirstName(string name, long socialNumber)
+        public void ChangeCustomerName(string name, long socialNumber)
         {
             //ändrar kundens gammla namn och sparar kundens nya namn
         }
@@ -38,22 +48,36 @@ namespace BankLogic
             CustomerAccounts.Add(new SavingsAccount(AccountType.Savings, CustomerSocialNumber));
         }
 
-        
 
-
-        public /*List<string>*/ void RemoveCustomer(long socialNumber)
+        public void RemoveCustomer(long socialNumber)
         {
+
 
         }
         
-        //public List<SavingsAccount> ReturnAccountsFromCustomer()
+        public List<SavingsAccount> ReturnAccountsFromCustomer()
+        {
+            return CustomerAccounts;
+        }
+
+
+
+        public override string ToString()
+        {
+            return $"Name:{FullName}-{CustomerSocialNumber}:Created:{CustomerSince}";
+        }
+
+        public void ReadFromDB()
+        {
+            var runner = new DataAccess.ReadFromCSV<Customer>();
+            runner.Read("Path");
+
+        }
+
+        //public void SaveToDB(List<Customer> customerList)
         //{
-        //    return CustomerAccounts;
+        //    var runner = new DataAccess.ReadFromCSV<Customer>();
+        //    runner.Write(customerList,"customer.csv");
         //}
-
-        // implementera en metod som ska låta andvändaren se
-        // information om kunden som T:ex kontonummer, saldo, kontotyp, räntesats
-        // kanske ärva av SavingAccount och BankLogic för båda ska ha samma typ av metod
-
     }
 }
