@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankLogic", "BankLogic\BankLogic.csproj", "{E6D03754-495B-4E9C-BD76-39C634636FE6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{722AA366-29FE-4824-8456-990DD6123A79} = {722AA366-29FE-4824-8456-990DD6123A79}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankUI", "BankUI\BankUI.csproj", "{9734F216-08F4-4F74-8819-BF5AF7406C64}"
 EndProject
