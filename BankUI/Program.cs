@@ -10,6 +10,11 @@ namespace BankUI
         {
             Bank.ReadFromDB();
             bool quit = false;
+
+            var path = AppDomain.CurrentDomain.BaseDirectory + "csv.txt";
+
+            Console.WriteLine(path);
+            Console.ReadLine();
             do
             {
                 var bankCustomers = Bank.GetCustomers();
