@@ -43,7 +43,6 @@ namespace DataAccess
             {
                 csv.WriteRecords(records);
             }
-
         }
     }
 }

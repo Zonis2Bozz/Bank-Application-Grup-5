@@ -10,13 +10,13 @@ namespace BankUI
         {
             Bank.ReadFromDB();
             bool quit = false;
-
+             
             var path = AppDomain.CurrentDomain.BaseDirectory + "csv.txt";
 
             Console.WriteLine(path);
-            Console.ReadLine();
             do
             {
+                Bank.ReadFromDB();
                 var bankCustomers = Bank.GetCustomers();
                 Console.WriteLine("1. Add new customer\n2. Select Account\n3. Show all customers\n4. Exit");
                 _ = Int32.TryParse(Console.ReadLine(), out int menu);
@@ -48,6 +48,27 @@ namespace BankUI
                         {
                             Console.WriteLine($"[{i}]{bankCustomers[i]} ");
                         }
+
+                        Int32.TryParse(Console.ReadLine(), out int select);
+                        bankCustomers[select].CreateAccount();
+                        bankCustomers[select].CreateAccount();
+                        bankCustomers[select].CreateAccount();
+                        bankCustomers[select].CreateAccount();
+
+                        foreach (var account in bankCustomers[select].CustomerAccounts)
+                        {
+                            Console.WriteLine(account.ToString());
+                        }
+                        foreach (var account in bankCustomers[select].CustomerAccounts)
+                        {
+                            account.Deposit(10000);
+
+                        }
+                        foreach (var account in bankCustomers[select].CustomerAccounts)
+                        {
+                            Console.WriteLine(account.ToString());
+                        }
+                        Bank.SaveToDB();
                         break;
                     case 3:
                         foreach (var customer in bankCustomers)
@@ -56,7 +77,18 @@ namespace BankUI
                         }
                         Console.ReadLine();
                         break;
-                    case 4: quit = true;
+                    case 4:
+                        quit = true;
+                        break;
+                    case 5:
+                        foreach (var customer in bankCustomers)
+                        {
+                            Console.WriteLine(customer.ToString());
+                            foreach (var account in customer.CustomerAccounts)
+                            {
+                                Console.WriteLine(account.ToString());
+                            }
+                        }
                         break;
                     default:
                         break;
@@ -64,7 +96,7 @@ namespace BankUI
 
 
 
-
+                
             } while (!quit);
 
 

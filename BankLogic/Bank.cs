@@ -93,19 +93,31 @@ namespace BankLogic
                     savingsAccounts.Add(AllCustomers[i].CustomerAccounts[j]);
                 }
             }
+            AllAccounts = savingsAccounts;
             return savingsAccounts;
         }
 
         public static void ReadFromDB()
         {
             AllCustomers = Customer.ReadFromDB();
-            SavingsAccount.ReadFromDB();
+            foreach (var account in SavingsAccount.ReadFromDB())
+            {
+                foreach (var customer in AllCustomers)
+                {
+                    if (customer.CustomerSocialNumber == account.CustomerId)
+                    {
+                        customer.CreateAccount(account);
+                    }
+                }
+            }
+            
         }
 
         public static void SaveToDB()
         {
+            Bank.GetSavingsAccounts();
             DataAccess.CSV.Write<Customer>(AllCustomers, "customer.csv");
-            DataAccess.CSV.Write<SavingsAccount>(Bank.GetSavingsAccounts(), "savingsAccounts.csv");
+            DataAccess.CSV.Write<SavingsAccount>(AllAccounts, "savingsAccounts.csv");
         }
     }
 }

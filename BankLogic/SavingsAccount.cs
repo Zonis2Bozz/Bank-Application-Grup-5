@@ -13,19 +13,32 @@ namespace BankLogic
     }
     public class SavingsAccount
 {
-
-        public int AccountId { get; private set; }
+        public long AccountNumber { get; }
         public double Interest { get; private set; }
-        public readonly AccountType AccountType;
-        private readonly long CustomerId;
+        public AccountType AccountType { get;}
+        public long CustomerId { get;}
         public decimal AccountBalance { get; set; }
 
-        public SavingsAccount(AccountType type, long socialNumber)
+        private SavingsAccount(int accountNumber, AccountType accountType, long customerId, decimal accountBalance)
         {
-            AccountType = type;
-            CustomerId = socialNumber;
-            AccountId = Bank.GetCustomerBySocialNumber(CustomerId).NumberOfAccounts;
+            AccountNumber = accountNumber;
+            AccountType = accountType;
+            CustomerId = customerId;
+            AccountBalance = accountBalance;
+        }
+        public SavingsAccount(AccountType accountType, long customerId)
+        {
+            AccountType = accountType;
+            CustomerId = customerId;
             AccountBalance = 1000;
+        }
+
+        public SavingsAccount(SavingsAccount savingsAccount)
+        {
+            Interest = savingsAccount.Interest;
+            AccountType = savingsAccount.AccountType;
+            CustomerId = savingsAccount.CustomerId;
+            AccountBalance = savingsAccount.AccountBalance;
         }
 
         public void Deposit(decimal amount)
@@ -39,7 +52,7 @@ namespace BankLogic
             bool validated = false;
             if (amount > 0 && AccountBalance - amount >= 0)
             {
-                Console.WriteLine($"Withdrew {amount:C} from Account: {AccountId}");
+                Console.WriteLine($"Withdrew {amount:C} from Account");
                 AccountBalance -= amount;
                 validated = true;
             }
@@ -49,13 +62,13 @@ namespace BankLogic
             }
             else
             {
-                Console.WriteLine($"{AccountId}: Balance to low");
+                Console.WriteLine($": Balance to low");
             }
             return validated;
         }
         public override string ToString()
         {
-            return $"[{AccountId}]:{AccountType}:Balance:{AccountBalance}";
+            return $"{AccountType}:Balance:{AccountBalance}";
         }
         public static List<SavingsAccount> ReadFromDB()
         {

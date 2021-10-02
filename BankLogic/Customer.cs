@@ -13,16 +13,17 @@ namespace BankLogic
         public long CustomerSocialNumber { get; }
         public string CustomerSince { get;} = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
 
-        public List<SavingsAccount> CustomerAccounts { get; private set; }
-        public int NumberOfAccounts { get; private set; } = 0;
+        public List<SavingsAccount> CustomerAccounts { get; private set; } = new List<SavingsAccount>();
+        public int NumberOfAccounts { get; private set; }
 
 
-        public Customer(string firstName, string lastName, long customerSocialNumber, string customerSince)
+        public Customer(string firstName, string lastName, long customerSocialNumber, string customerSince, int numberOfAccounts)
         {
             FirstName = firstName;
             LastName = lastName;
             CustomerSocialNumber = customerSocialNumber;
             CustomerSince = customerSince;
+            NumberOfAccounts = numberOfAccounts;
         }
 
 
@@ -31,7 +32,7 @@ namespace BankLogic
             FirstName = firstName;
             LastName = lastName;
             CustomerSocialNumber = socialNumber;
-            CustomerAccounts = new List<SavingsAccount>();        
+            NumberOfAccounts = 0;
         }
 
         public void ChangeCustomerName(string name, long socialNumber)
@@ -40,15 +41,20 @@ namespace BankLogic
         } //NULL
         public void CreateAccount()
         {
-            NumberOfAccounts++;
-            CustomerAccounts.Add(new SavingsAccount(AccountType.Savings, CustomerSocialNumber));
-        }
-        public void CreateAccount(List<SavingsAccount> savingsAccounts)
-        {
-            foreach (var account in savingsAccounts)
+            if (NumberOfAccounts < 5)
             {
-                
+                NumberOfAccounts++;
+                CustomerAccounts.Add(new SavingsAccount(AccountType.Savings, CustomerSocialNumber));
+                Console.WriteLine("Account Created");
             }
+            else
+            {
+                Console.WriteLine("You have to many accounts");
+            }
+        }
+        public void CreateAccount(SavingsAccount savingsAccounts)
+        {
+            CustomerAccounts.Add(new SavingsAccount(savingsAccounts));
         }
 
         public void RemoveCustomer(long socialNumber)
