@@ -19,7 +19,7 @@ namespace BankUI
             {
                 var bankCustomers = Bank.GetCustomers();
                 Console.WriteLine("1. Add new customer\n2. Select Account\n3. Show all customers\n4. Exit");
-                Int32.TryParse(Console.ReadLine(), out int menu);
+                _ = Int32.TryParse(Console.ReadLine(), out int menu);
                 switch (menu)
                 {
                     case 1:

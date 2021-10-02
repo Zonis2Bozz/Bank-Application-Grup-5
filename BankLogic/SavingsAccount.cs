@@ -11,7 +11,7 @@ namespace BankLogic
         Savings,
         Spending
     }
-    public class SavingsAccount : ICSV<SavingsAccount>
+    public class SavingsAccount
 {
 
         public int AccountId { get; private set; }
