@@ -3,19 +3,21 @@ using System.Text.RegularExpressions;
 
 namespace BankLogic
 {
-    public class Bank //: IRead
+    public class Bank
     {
         private static List<Customer> AllCustomers { get; set; }
+        private static List<SavingsAccount> AllAccounts { get; set; }
         public Bank()
         {
             AllCustomers = new List<Customer>();
+            AllAccounts = new List<SavingsAccount>();
         }
         public static List<Customer> GetCustomers()
         {
             return AllCustomers;
         }
 
-        public static Customer GetCustomer(long socialNumber)
+        public static Customer GetCustomerBySocialNumber(long socialNumber)
         {
             if (AllCustomers != null)
             {
@@ -31,7 +33,7 @@ namespace BankLogic
             return null;
         }
 
-        public bool AddCustomer(string firstName, string lastName, long socialNumber)
+        public static bool AddCustomer(string firstName, string lastName, long socialNumber)
         {
             bool success = false;
             if (ValidateCustomerSocialNumber(socialNumber))
@@ -79,16 +81,31 @@ namespace BankLogic
             return validated;
         }
 
-        //public void ReadFromDB()
-        //{
-        //    var runner = new DataAccess.ReadFromCSV<Customer>();
-        //    runner.Write(AllCustomers, "customer.csv");
-        //}
+        public static List<SavingsAccount> GetSavingsAccounts()
+        {
+            List<SavingsAccount> savingsAccounts = new();
 
-        //public void SaveToDB()
-        //{
-        //    var runner = new DataAccess.ReadFromCSV<Customer>();
-        //    runner.Write(AllCustomers, "customer.csv");
-        //}
+
+            for (int i = 0; i < AllCustomers.Count; i++)
+            {
+                for (int j = 0; j < AllCustomers[i].CustomerAccounts.Count; j++)
+                {
+                    savingsAccounts.Add(AllCustomers[i].CustomerAccounts[j]);
+                }
+            }
+            return savingsAccounts;
+        }
+
+        public static void ReadFromDB()
+        {
+            AllCustomers = Customer.ReadFromDB();
+            SavingsAccount.ReadFromDB();
+        }
+
+        public static void SaveToDB()
+        {
+            DataAccess.CSV.Write<Customer>(AllCustomers, "customer.csv");
+            DataAccess.CSV.Write<SavingsAccount>(Bank.GetSavingsAccounts(), "savingsAccounts.csv");
+        }
     }
 }

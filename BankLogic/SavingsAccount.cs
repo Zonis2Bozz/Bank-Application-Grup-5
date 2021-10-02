@@ -11,8 +11,8 @@ namespace BankLogic
         Savings,
         Spending
     }
-    public class SavingsAccount
-    {
+    public class SavingsAccount : ICSV<SavingsAccount>
+{
 
         public int AccountId { get; private set; }
         public double Interest { get; private set; }
@@ -24,7 +24,7 @@ namespace BankLogic
         {
             AccountType = type;
             CustomerId = socialNumber;
-            AccountId = Bank.GetCustomer(CustomerId).NumberOfAccounts;
+            AccountId = Bank.GetCustomerBySocialNumber(CustomerId).NumberOfAccounts;
             AccountBalance = 1000;
         }
 
@@ -33,11 +33,7 @@ namespace BankLogic
             AccountBalance += amount;
             Console.WriteLine();
         }
-        /// <summary>
-        /// Whitdraw if the account has enough balance
-        /// </summary>
-        /// <param name="amount"></param>
-        /// <returns></returns>
+
         public bool Withdraw(decimal amount)
         {
             bool validated = false;
@@ -60,6 +56,15 @@ namespace BankLogic
         public override string ToString()
         {
             return $"[{AccountId}]:{AccountType}:Balance:{AccountBalance}";
+        }
+        public static List<SavingsAccount> ReadFromDB()
+        {
+            List<SavingsAccount> data = DataAccess.CSV.Read<SavingsAccount>("savingsAccounts.csv");
+            return data;
+        }
+        public static void SaveToDB()
+        {
+            DataAccess.CSV.Write<SavingsAccount>(Bank.GetSavingsAccounts(), "savingsAccounts.csv");
         }
     }
 }

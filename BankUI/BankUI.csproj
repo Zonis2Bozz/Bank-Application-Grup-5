@@ -9,10 +9,4 @@
     <ProjectReference Include="..\BankLogic\BankLogic.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="customer.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>
