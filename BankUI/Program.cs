@@ -17,6 +17,7 @@ namespace BankUI
             do
             {
                 Bank.ReadFromDB();
+                
                 var bankCustomers = Bank.GetCustomers();
                 Console.WriteLine("1. Add new customer\n2. Select Account\n3. Show all customers\n4. Exit");
                 _ = Int32.TryParse(Console.ReadLine(), out int menu);
@@ -50,10 +51,7 @@ namespace BankUI
                         }
 
                         Int32.TryParse(Console.ReadLine(), out int select);
-                        bankCustomers[select].CreateAccount();
-                        bankCustomers[select].CreateAccount();
-                        bankCustomers[select].CreateAccount();
-                        bankCustomers[select].CreateAccount();
+
 
                         foreach (var account in bankCustomers[select].CustomerAccounts)
                         {
@@ -94,7 +92,7 @@ namespace BankUI
                         break;
                 }
 
-
+                bankCustomers = Bank.GetCustomers();
 
                 
             } while (!quit);

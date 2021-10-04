@@ -19,22 +19,24 @@ namespace BankLogic
         public long CustomerId { get;}
         public decimal AccountBalance { get; set; }
 
-        private SavingsAccount(int accountNumber, AccountType accountType, long customerId, decimal accountBalance)
+        public SavingsAccount(AccountType accountType, long customerId, int accountNumber, decimal accountBalance)
         {
-            AccountNumber = accountNumber;
             AccountType = accountType;
             CustomerId = customerId;
             AccountBalance = accountBalance;
+            AccountNumber = accountNumber;
         }
         public SavingsAccount(AccountType accountType, long customerId)
         {
+            AccountNumber = 1;
             AccountType = accountType;
             CustomerId = customerId;
-            AccountBalance = 1000;
+            AccountBalance = 0;
         }
 
         public SavingsAccount(SavingsAccount savingsAccount)
         {
+            AccountNumber = savingsAccount.AccountNumber;
             Interest = savingsAccount.Interest;
             AccountType = savingsAccount.AccountType;
             CustomerId = savingsAccount.CustomerId;
@@ -43,8 +45,15 @@ namespace BankLogic
 
         public void Deposit(decimal amount)
         {
-            AccountBalance += amount;
-            Console.WriteLine();
+            if (amount > 0)
+            {
+                AccountBalance += amount;
+                Console.WriteLine($"Deposited {amount} new balance:{AccountBalance}");
+            }
+            else
+            {
+                Console.WriteLine("Cant deposit negative numbers");
+            }
         }
 
         public bool Withdraw(decimal amount)

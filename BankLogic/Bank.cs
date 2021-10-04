@@ -100,7 +100,8 @@ namespace BankLogic
         public static void ReadFromDB()
         {
             AllCustomers = Customer.ReadFromDB();
-            foreach (var account in SavingsAccount.ReadFromDB())
+            var accounList = SavingsAccount.ReadFromDB();
+            foreach (var account in accounList)
             {
                 foreach (var customer in AllCustomers)
                 {
