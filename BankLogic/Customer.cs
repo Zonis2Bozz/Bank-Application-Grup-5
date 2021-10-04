@@ -13,9 +13,16 @@ namespace BankLogic
         public long CustomerSocialNumber { get; }
         public string CustomerSince { get;} = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
 
-        public List<SavingsAccount> CustomerAccounts { get; private set; } = new List<SavingsAccount>();
+        private List<SavingsAccount> CustomerAccounts { get; set; } = new List<SavingsAccount>();
         public int NumberOfAccounts { get; private set; }
-
+        public Customer(Customer customer)
+        {
+            FirstName = customer.FirstName;
+            LastName = customer.LastName;
+            CustomerSocialNumber = customer.CustomerSocialNumber;
+            CustomerSince = customer.CustomerSince;
+            NumberOfAccounts = customer.NumberOfAccounts;
+        }
 
         public Customer(string firstName, string lastName, long customerSocialNumber, string customerSince, int numberOfAccounts)
         {
@@ -26,7 +33,18 @@ namespace BankLogic
             NumberOfAccounts = numberOfAccounts;
         }
 
-
+        public string GetCustomerName()
+        {
+            return FirstName + " " + LastName;
+        }
+        public long GetCustomerSocialNumber()
+        {
+            return CustomerSocialNumber;
+        }
+        public List<SavingsAccount> GetAccounts()
+        {
+            return CustomerAccounts;
+        }
         public Customer(string firstName, string lastName, long socialNumber)
         {
             FirstName = firstName;
@@ -72,12 +90,11 @@ namespace BankLogic
         //SAVE/READ
         public static List<Customer> ReadFromDB()
         {
-            List<Customer> data = DataAccess.CSV.Read<Customer>("customer.csv");
-            return data;
+            return DataAccess.CSV.Read<Customer>(Bank.FilePathCustomer);
         }
-        public static void SaveToDB()
-        {
-            DataAccess.CSV.Write<Customer>(Bank.GetCustomers(), "customer.csv");
-        }
+        //public static void SaveToDB()
+        //{
+        //    DataAccess.CSV.Write<Customer>(Bank.GetCustomers(), Bank.FilePathCustomer);
+        //}
     }
 }

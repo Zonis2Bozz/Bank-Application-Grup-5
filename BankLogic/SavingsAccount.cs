@@ -81,12 +81,8 @@ namespace BankLogic
         }
         public static List<SavingsAccount> ReadFromDB()
         {
-            List<SavingsAccount> data = DataAccess.CSV.Read<SavingsAccount>("savingsAccounts.csv");
+            List<SavingsAccount> data = DataAccess.CSV.Read<SavingsAccount>(Bank.FilePathSavingsAccount);
             return data;
-        }
-        public static void SaveToDB()
-        {
-            DataAccess.CSV.Write<SavingsAccount>(Bank.GetSavingsAccounts(), "savingsAccounts.csv");
         }
     }
 }

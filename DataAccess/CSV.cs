@@ -37,12 +37,9 @@ namespace DataAccess
         public static void Write<T>(List<T> list, string filePath)
         {
             var records = list;
-
-            using (var writer = new StreamWriter(Path.GetFullPath(filePath)))
-            using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
-            {
-                csv.WriteRecords(records);
-            }
+            using var writer = new StreamWriter(Path.GetFullPath(filePath));
+            using var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
+            csv.WriteRecords(records);
         }
     }
 }
