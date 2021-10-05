@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace BankLogic
 {
@@ -29,6 +28,7 @@ namespace BankLogic
             return null;
         }
 
+
         public static void AddCustomer(Customer customer)
         {
             AllCustomers.Add(new Customer(customer));
@@ -48,11 +48,11 @@ namespace BankLogic
         {
             AllCustomers = Customer.ReadFromDB();
 
-            // Loops alla accounts and sets adds it to the right customer
+            // Loops all accounts and adds it to the right customer
             foreach (var account in SavingsAccount.ReadFromDB())
             {
                 foreach (var customer in AllCustomers)
-                {
+                {                 
                     if (customer.GetCustomerSocialNumber() == account.CustomerId)
                     {
                         customer.CreateAccount(account);
