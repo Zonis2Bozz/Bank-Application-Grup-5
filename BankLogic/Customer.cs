@@ -107,7 +107,7 @@ namespace BankLogic
 
         public override string ToString()
         {
-            return $"Name:{FirstName} {LastName}\nID:{CustomerSocialNumber}:Created:{CustomerSince}";
+            return $"Name:{FirstName} {LastName}ID:{CustomerSocialNumber}:Created:{CustomerSince}";
         }
 
 

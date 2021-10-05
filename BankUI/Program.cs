@@ -43,7 +43,9 @@ namespace BankUI
                         {
                             Console.WriteLine(customer.ToString());
                         }
-                        Clear();
+                        Console.WriteLine("Enter to continue");
+                        Console.ReadLine();
+                        Console.Clear();
                         break;
                     case 4:
                         quit = true;
