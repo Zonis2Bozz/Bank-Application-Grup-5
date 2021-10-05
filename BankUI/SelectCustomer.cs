@@ -207,7 +207,7 @@ namespace BankUI
                         {
                             bool quitWithdrawMenu = false;
                             Console.Clear();
-                            while (quitWithdrawMenu)
+                            while (!quitWithdrawMenu)
                             {
                                 PrintAccountHeader();
                                 Console.WriteLine("Enter account number to withdraw from [e] to exit");
@@ -232,6 +232,8 @@ namespace BankUI
                                         var account = CurrentCustomer.GetAccountByAccountNumber(accountNumber);
                                         while (true)
                                         {
+                                            Console.Clear();
+                                            PrintAccountHeader();
                                             Console.WriteLine("Enter amount to withdraw [e] to exit");
                                             string useInp = Console.ReadLine();
                                             if (useInp.ToLower() == "e")
@@ -244,12 +246,15 @@ namespace BankUI
                                                 if (account.Withdraw(amount))
                                                 {
                                                     quitWithdrawMenu = true;
+                                                    Thread.Sleep(500);
+                                                    Program.Clear();
                                                     break;
                                                 }
                                             }
                                             else
                                             {
                                                 Console.WriteLine("Invalid input");
+                                                Program.Clear();
                                             }
                                         }
                                     }

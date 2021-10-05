@@ -59,6 +59,7 @@ namespace BankUI
                         }
                         break;
                     default:
+                        Console.Clear();
                         break;
                 }
                 Bank.SaveToDB();
