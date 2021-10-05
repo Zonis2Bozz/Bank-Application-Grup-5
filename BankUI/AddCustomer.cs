@@ -29,8 +29,7 @@ namespace BankUI
                             break;
                         default:
                             Console.WriteLine("Invalid inp (Y/N)");
-                            Thread.Sleep(1000);
-                            Console.Clear();
+                            Program.Clear();
                             break;
                     }
                 }
@@ -73,6 +72,7 @@ namespace BankUI
                 name = Console.ReadLine();
                 if (name.ToLower() == "e")
                 {
+                    Console.Clear();
                     return null;
                 }
                 else if (name.ValidateName())
@@ -83,8 +83,8 @@ namespace BankUI
                 else
                 {
                     Console.WriteLine("Invalid Input A-ö allowed");
-                    Thread.Sleep(1000);
-                    Console.Clear();
+                    Program.Clear();
+
                 }
             }
         }
@@ -97,6 +97,7 @@ namespace BankUI
                 string social = Console.ReadLine();
                 if (social.ToLower() == "e")
                 {
+                    Console.Clear();
                     return -1;
                 }
                 else if(social.ValidateSocialNumber())
@@ -110,13 +111,14 @@ namespace BankUI
                     {
                         Console.Clear();
                         Console.WriteLine($"Customer with socialnumber: {socialNumber} does already existing");
+                        Program.Clear();
                     }
                 }
                 else
                 {
                     Console.WriteLine("Invalid Input (8 digits)");
-                    Thread.Sleep(1000);
-                    Console.Clear();
+                    Program.Clear();
+
                 }
             }
         }

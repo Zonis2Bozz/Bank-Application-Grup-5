@@ -1,4 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using CsvHelper;
+using CsvHelper.Configuration;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 
 namespace BankLogic
@@ -7,6 +12,7 @@ namespace BankLogic
     {
         public const string FilePathCustomer = "Data\\customer.csv";
         public const string FilePathSavingsAccount = "Data\\savingsAccounts.csv";
+        public const string FilePathCurrentAccount = "Data\\currentAccount.csv";
         private static List<Customer> AllCustomers { get; set; }
 
 
@@ -41,7 +47,14 @@ namespace BankLogic
         {
             AllCustomers.Add(customer);
         }
-
+        /// <summary>
+        /// Remove customer
+        /// </summary>
+        /// <param name="socialNumber"></param>
+        public static void RemoveCustomer(long socialNumber)
+        {
+            AllCustomers.Remove(GetCustomerBySocialNumber(socialNumber));
+        }
 
         /// <summary>
         /// Returns a list of all accounts
@@ -64,7 +77,7 @@ namespace BankLogic
             foreach (var account in SavingsAccount.ReadFromDB())
             {
                 foreach (var customer in AllCustomers)
-                {                 
+                {
                     if (customer.GetCustomerSocialNumber() == account.CustomerId)
                     {
                         customer.CreateAccount(account);
@@ -81,5 +94,40 @@ namespace BankLogic
             DataAccess.CSV.Write<Customer>(AllCustomers, FilePathCustomer);
             DataAccess.CSV.Write<SavingsAccount>(GetAllSavingsAccounts(), FilePathSavingsAccount);
         }
+
+        // Getting the account number
+        public static long GetCurrentAccountNumber()
+        {
+            long num = 0;
+
+            using (StreamReader sr = File.OpenText(Bank.FilePathCurrentAccount))
+            {
+                string s = String.Empty;
+                while ((s = sr.ReadLine()) != null)
+                {
+                    num = long.Parse(s);
+                }
+            }
+            if (num > 1000)
+            {
+                SetCurrentAccountNumber( num);
+                return num;
+            }
+
+            else
+            {
+                SetCurrentAccountNumber(1001);
+                return 1001;              
+            }
+        }
+
+        public static void SetCurrentAccountNumber(long num)
+        {
+            string text = string.Empty;
+            text += num + 1;
+            File.WriteAllText(Bank.FilePathCurrentAccount, text);
+
+        }
+
     }
 }
