@@ -15,6 +15,9 @@ namespace BankUI
                 Console.WriteLine("Select by social number [e] to go back to menu");
                 Console.WriteLine("----------------------------------------------");
                 Console.Write("Enter socialnumber:");
+
+                string userInp = Console.ReadLine();
+
                 long.TryParse(Console.ReadLine(), out long socialNumber);
                 CurrentCustomer = Bank.GetCustomerBySocialNumber(socialNumber);
                 if (CurrentCustomer != null)

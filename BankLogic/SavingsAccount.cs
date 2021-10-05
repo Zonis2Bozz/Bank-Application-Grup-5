@@ -79,6 +79,11 @@ namespace BankLogic
         {
             return $"{AccountType}:Balance:{AccountBalance}";
         }
+        /// <summary>
+        /// Reads accounts from csv file and returns a list of accounts
+        /// Needs to be in accounts class to automap accounts
+        /// </summary>
+        /// <returns></returns>
         public static List<SavingsAccount> ReadFromDB()
         {
             List<SavingsAccount> data = DataAccess.CSV.Read<SavingsAccount>(Bank.FilePathSavingsAccount);

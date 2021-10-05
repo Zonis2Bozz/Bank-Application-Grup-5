@@ -20,7 +20,7 @@ namespace BankUI
                     switch (Console.ReadLine().ToLower())
                     {
                         case "y":
-                            Bank.AddCustomer(newCustomer);
+                            Bank.AddToCustomerList(newCustomer);
                             quit = true;
                             validated = true;
                             break;

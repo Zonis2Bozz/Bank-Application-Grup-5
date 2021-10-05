@@ -22,6 +22,11 @@ namespace BankLogic
             return Regex.Match(name, "^[a-öA-Ö]*$").Success;
         }
 
+        /// <summary>
+        /// Checks if given string can be parsed as long and lenght of 8
+        /// </summary>
+        /// <param name="socialNumber"></param>
+        /// <returns></returns>
         public static bool ValidateSocialNumber(this string socialNumber)
         {
             if (long.TryParse(socialNumber, out long _))

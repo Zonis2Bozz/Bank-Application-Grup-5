@@ -7,8 +7,13 @@ namespace BankLogic
     {
         public const string FilePathCustomer = "Data\\customer.csv";
         public const string FilePathSavingsAccount = "Data\\savingsAccounts.csv";
-
         private static List<Customer> AllCustomers { get; set; }
+
+
+        /// <summary>
+        /// Returns a list<Customer> of all customers
+        /// </summary>
+        /// <returns></returns>
         public static List<Customer> GetCustomers()
         {
             return AllCustomers;
@@ -28,10 +33,13 @@ namespace BankLogic
             return null;
         }
 
-
-        public static void AddCustomer(Customer customer)
+        /// <summary>
+        /// Adds a customer to AllCustomer list
+        /// </summary>
+        /// <param name="customer"></param>
+        public static void AddToCustomerList(Customer customer)
         {
-            AllCustomers.Add(new Customer(customer));
+            AllCustomers.Add(customer);
         }
 
 
@@ -44,6 +52,10 @@ namespace BankLogic
             return AllCustomers.SelectMany(x => x.GetAccounts()).Distinct().ToList();
         }
 
+        /// <summary>
+        /// Reads customer from Csv file and adds customers to AllCustomers
+        /// Reads accounts from CSV file and adds all accounts to the right customer
+        /// </summary>
         public static void ReadFromDB()
         {
             AllCustomers = Customer.ReadFromDB();
@@ -60,7 +72,10 @@ namespace BankLogic
                 }
             }
         }
-
+        /// <summary>
+        /// Saves all customers to CSV file
+        /// Saves all accounts to CSV file
+        /// </summary>
         public static void SaveToDB()
         {
             DataAccess.CSV.Write<Customer>(AllCustomers, FilePathCustomer);

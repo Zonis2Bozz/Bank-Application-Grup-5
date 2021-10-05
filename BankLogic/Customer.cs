@@ -87,14 +87,14 @@ namespace BankLogic
         }
 
 
-        //SAVE/READ
+        /// <summary>
+        /// Reads customer from csv file and returns a list of customers
+        /// Needs to be in customer class to automap customer and return a list of customers
+        /// </summary>
+        /// <returns></returns>
         public static List<Customer> ReadFromDB()
         {
             return DataAccess.CSV.Read<Customer>(Bank.FilePathCustomer);
         }
-        //public static void SaveToDB()
-        //{
-        //    DataAccess.CSV.Write<Customer>(Bank.GetCustomers(), Bank.FilePathCustomer);
-        //}
     }
 }
