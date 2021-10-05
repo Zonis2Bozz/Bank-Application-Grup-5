@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "BankUI": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Users\\Fredr\\source\\repos\\FreddeJon\\Bank-Application-Grup-5\\BankUI"
+    }
+  }
+}
