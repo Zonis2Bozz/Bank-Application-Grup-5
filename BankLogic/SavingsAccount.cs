@@ -19,9 +19,10 @@ namespace BankLogic
         public long CustomerId { get;}
         public decimal AccountBalance { get; set; }
 
-        public SavingsAccount(AccountType accountType, long customerId, int accountNumber, decimal accountBalance)
+        public SavingsAccount(AccountType accountType, decimal interest, long customerId, int accountNumber, decimal accountBalance)
         {
             AccountType = accountType;
+            Interest = interest;
             CustomerId = customerId;
             AccountBalance = accountBalance;
             AccountNumber = accountNumber;

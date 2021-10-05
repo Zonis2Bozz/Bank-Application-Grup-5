@@ -16,6 +16,7 @@ namespace BankLogic
         private static List<Customer> AllCustomers { get; set; }
 
 
+
         /// <summary>
         /// Returns a list<Customer> of all customers
         /// </summary>
@@ -24,6 +25,9 @@ namespace BankLogic
         {
             return AllCustomers;
         }
+
+
+
         /// <summary>
         /// Returns a Customer with social number. Null if not found
         /// </summary>
@@ -39,6 +43,8 @@ namespace BankLogic
             return null;
         }
 
+
+
         /// <summary>
         /// Adds a customer to AllCustomer list
         /// </summary>
@@ -47,6 +53,8 @@ namespace BankLogic
         {
             AllCustomers.Add(customer);
         }
+
+
         /// <summary>
         /// Remove customer
         /// </summary>
@@ -56,6 +64,8 @@ namespace BankLogic
             AllCustomers.Remove(GetCustomerBySocialNumber(socialNumber));
         }
 
+
+
         /// <summary>
         /// Returns a list of all accounts
         /// </summary>
@@ -64,6 +74,8 @@ namespace BankLogic
         {
             return AllCustomers.SelectMany(x => x.GetAccounts()).Distinct().ToList();
         }
+
+
 
         /// <summary>
         /// Reads customer from Csv file and adds customers to AllCustomers
@@ -85,6 +97,9 @@ namespace BankLogic
                 }
             }
         }
+
+
+
         /// <summary>
         /// Saves all customers to CSV file
         /// Saves all accounts to CSV file
@@ -95,7 +110,10 @@ namespace BankLogic
             DataAccess.CSV.Write<SavingsAccount>(GetAllSavingsAccounts(), FilePathSavingsAccount);
         }
 
-        // Getting the account number
+
+
+
+        // Getting account number to use when creating new account
         public static long GetCurrentAccountNumber()
         {
             long num = 0;
