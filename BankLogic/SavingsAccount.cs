@@ -43,6 +43,8 @@ namespace BankLogic
             }
         }
 
+
+
         public SavingsAccount(SavingsAccount savingsAccount)
         {
             AccountNumber = savingsAccount.AccountNumber;
@@ -52,10 +54,14 @@ namespace BankLogic
             AccountBalance = savingsAccount.AccountBalance;
         }
 
+
+
         public decimal GetBalance()
         {
             return AccountBalance;
         }
+
+
 
         public bool Deposit(decimal amount)
         {
@@ -71,6 +77,8 @@ namespace BankLogic
                 return false;
             }
         }
+
+
 
         public bool Withdraw(decimal amount)
         {
@@ -91,10 +99,16 @@ namespace BankLogic
             }
             return validated;
         }
+
+
+
         public override string ToString()
         {
             return $"[{AccountNumber}]{AccountType}:Balance:{AccountBalance:C}";
         }
+
+
+
         /// <summary>
         /// Reads accounts from csv file and returns a list of accounts
         /// Needs to be in accounts class to automap accounts
