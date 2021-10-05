@@ -81,6 +81,8 @@ namespace BankUI
                                 case "y":
                                     CurrentCustomer = Bank.GetCustomerBySocialNumber(CurrentCustomer.GetCustomerSocialNumber());
                                     decimal payout = 0;
+                                    Console.Clear();
+                                    PrintCustomerHeader();
                                     foreach (var account in CurrentCustomer.GetAccounts())
                                     {
                                         payout = account.GetBalance();
@@ -94,7 +96,8 @@ namespace BankUI
                                     {
                                         Console.WriteLine("Closed accounts");
                                     }
-
+                                    Console.Write("Enter to continue");
+                                    Console.ReadLine();
                                     Bank.RemoveCustomer(CurrentCustomer.GetCustomerSocialNumber());
                                     quit2 = true;
                                     quit = true;
@@ -173,7 +176,9 @@ namespace BankUI
                                                 if (account.Deposit(amount))
                                                 {
                                                     quitDepositMenu = true;
-                                                    Thread.Sleep(500);
+                                                    Console.Write("Enter to continue");
+                                                    Console.ReadLine();
+                                                    Console.Clear();
                                                     break;
                                                 }
                                             }
@@ -246,8 +251,9 @@ namespace BankUI
                                                 if (account.Withdraw(amount))
                                                 {
                                                     quitWithdrawMenu = true;
-                                                    Thread.Sleep(500);
-                                                    Program.Clear();
+                                                    Console.Write("Enter to continue");
+                                                    Console.ReadLine();
+                                                    Console.Clear();
                                                     break;
                                                 }
                                             }
